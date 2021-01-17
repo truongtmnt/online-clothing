@@ -4,3 +4,12 @@ body {
 	font-family: "Yusei Magic", sans-serif;
 	padding: 20px 60px;
 }
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: green;
+}
