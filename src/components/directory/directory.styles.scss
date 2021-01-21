@@ -1,6 +1,13 @@
 .directory-menu {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+@media screen and (min-width: 320px) and (max-width: 600px) {
+	.directory-menu {
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
+}

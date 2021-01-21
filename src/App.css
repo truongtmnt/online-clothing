@@ -13,3 +13,7 @@ a {
 a:hover {
 	color: green;
 }
+
+* {
+	box-sizing: border-box;
+}
