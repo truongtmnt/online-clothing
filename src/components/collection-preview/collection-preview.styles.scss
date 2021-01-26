@@ -13,6 +13,7 @@
 		background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/78779/star.svg");
 		background-position: 0 1.5em;
 		background-size: 10px 9px;
+		animation: runrun 2s linear infinite;
 	}
 
 	.preview {
@@ -26,5 +27,15 @@
 		.preview {
 			flex-direction: column;
 		}
+	}
+}
+
+// animation
+@keyframes runrun {
+	from {
+		background-position: 0 1.5em;
+	}
+	to {
+		background-position: 1.39em 1.5em;
 	}
 }

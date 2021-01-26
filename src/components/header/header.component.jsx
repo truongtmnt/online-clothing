@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import MobileOptionHeader from "../../components/mobile-option-header/mobile-option-header.component";
 import { auth } from "../../firebase/firebase.utils";
+import { connect } from "react-redux";
 
-export default function Header({ currentUser }) {
+const Header = ({ currentUser }) => {
 	const isMobile = window.innerWidth < 400;
 	return (
 		<div className='header'>
@@ -37,4 +38,9 @@ export default function Header({ currentUser }) {
 			)}
 		</div>
 	);
-}
+};
+const mapStateToProp = (state) => ({
+	currentUser: state.user.currentUser,
+}); //get state from redux reducer
+
+export default connect(mapStateToProp)(Header);
