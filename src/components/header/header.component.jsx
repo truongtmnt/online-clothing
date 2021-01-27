@@ -5,8 +5,10 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import MobileOptionHeader from "../../components/mobile-option-header/mobile-option-header.component";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
+import CardIcon from "../card-icon/card-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
 	const isMobile = window.innerWidth < 400;
 	return (
 		<div className='header'>
@@ -34,13 +36,17 @@ const Header = ({ currentUser }) => {
 							SIGN IN
 						</Link>
 					)}
+
+					<CardIcon />
 				</div>
 			)}
+			{hidden ? null : <CartDropdown />}
 		</div>
 	);
 };
-const mapStateToProp = (state) => ({
-	currentUser: state.user.currentUser,
+const mapStateToProp = ({ user: { currentUser }, cart: { hidden } }) => ({
+	currentUser,
+	hidden,
 }); //get state from redux reducer
 
 export default connect(mapStateToProp)(Header);
