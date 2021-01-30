@@ -2,11 +2,18 @@ import React from "react";
 import "./header.styles.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
+
 import MobileOptionHeader from "../../components/mobile-option-header/mobile-option-header.component";
-import { auth } from "../../firebase/firebase.utils";
-import { connect } from "react-redux";
 import CardIcon from "../card-icon/card-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+
+import { auth } from "../../firebase/firebase.utils";
+import { connect } from "react-redux";
+
+
+import { createStructuredSelector } from "reselect";
+import { selectCartHidden } from "../../redux/cart/cart.selector";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 
 const Header = ({ currentUser, hidden }) => {
 	const isMobile = window.innerWidth < 400;
@@ -44,9 +51,9 @@ const Header = ({ currentUser, hidden }) => {
 		</div>
 	);
 };
-const mapStateToProp = ({ user: { currentUser }, cart: { hidden } }) => ({
-	currentUser,
-	hidden,
+const mapStateToProp = createStructuredSelector({
+	currentUser: selectCurrentUser,
+	hidden: selectCartHidden,
 }); //get state from redux reducer
 
 export default connect(mapStateToProp)(Header);
