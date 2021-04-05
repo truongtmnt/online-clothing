@@ -3,7 +3,7 @@ import logger from "redux-logger";
 import rootReducer from "./root-reducer.js";
 import { persistStore } from "redux-persist";
 
-const middleWare = [logger];
+const middleWare = [];
 //avoid logger on production, only log when development
 if (process.env.NODE_ENV === "development") {
 	middleWare.push(logger);
