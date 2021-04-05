@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import MobileOptionHeader from "../../components/mobile-option-header/mobile-option-header.component";
-import CardIcon from "../card-icon/card-icon.component";
+import CardIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 import { auth } from "../../firebase/firebase.utils";
