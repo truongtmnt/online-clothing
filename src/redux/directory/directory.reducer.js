@@ -19,11 +19,11 @@ const initialState = {
 			linkUrl: "shop/sneakers",
 		},
 		{
-			title: "women",
+			title: "womens",
 			imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
 			size: "large",
 			id: 4,
-			linkUrl: "shop/women",
+			linkUrl: "shop/womens",
 		},
 		{
 			title: "mens",
