@@ -1,6 +1,5 @@
 import React from "react";
 import "./header.styles.scss";
-import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import MobileOptionHeader from "../../components/mobile-option-header/mobile-option-header.component";
@@ -10,45 +9,45 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 
-
 import { createStructuredSelector } from "reselect";
 import { selectCartHidden } from "../../redux/cart/cart.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 
+import {
+	HeaderContainer,
+	OptionContainer,
+	OptionLink,
+	LogoContainer,
+} from "./header.styles.jsx";
+
 const Header = ({ currentUser, hidden }) => {
 	const isMobile = window.innerWidth < 400;
 	return (
-		<div className='header'>
-			<Link className='logo-container' to='/'>
+		<HeaderContainer>
+			<LogoContainer className='logo-container' to='/'>
 				<Logo className='logo' />
-			</Link>
+			</LogoContainer>
 
 			{isMobile ? (
 				<MobileOptionHeader />
 			) : (
-				<div className='options'>
-					<Link className='option' to='/'>
-						HOME
-					</Link>
-					<Link className='option' to='/shop'>
-						SHOP
-					</Link>
+				<OptionContainer>
+					<OptionLink to='/'>HOME</OptionLink>
+					<OptionLink to='/shop'>SHOP</OptionLink>
 
 					{currentUser ? (
-						<div className='option' onClick={() => auth.signOut()}>
+						<OptionLink as='div' onClick={() => auth.signOut()}>
 							SIGN OUT
-						</div>
+						</OptionLink>
 					) : (
-						<Link className='option' to='/signIn'>
-							SIGN IN
-						</Link>
+						<OptionLink to='/signIn'>SIGN IN</OptionLink>
 					)}
 
 					<CardIcon />
-				</div>
+				</OptionContainer>
 			)}
 			{hidden ? null : <CartDropdown />}
-		</div>
+		</HeaderContainer>
 	);
 };
 const mapStateToProp = createStructuredSelector({

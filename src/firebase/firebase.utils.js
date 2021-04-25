@@ -18,7 +18,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 	const userRef = firestore.doc(`users/${userAuth.uid}`);
 	const snapShot = await userRef.get();
-	
+
 	// create user in database if user not exist in database
 	if (!snapShot.exists) {
 		const { displayName, email } = userAuth;
@@ -37,6 +37,38 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	}
 
 	return userRef;
+};
+
+//add collection shop data
+export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
+	const collectionRef = firestore.collection(collectionKey);
+	console.log("col", collectionRef);
+
+	const batch = firestore.batch();
+	objectsToAdd.forEach((obj) => {
+		const newDocRef = collectionRef.doc();
+		batch.set(newDocRef, obj);
+	});
+
+	return await batch.commit();
+};
+
+//convert Collection data - from backend form to front end form - which include routeName, id
+export const convertCollectionsSnapshotToMap = (collections) => {
+	const transformedCollection = collections.docs.map((doc) => {
+		const { title, items } = doc.data();
+		return {
+			routeName: encodeURI(title.toLowerCase()),
+			id: doc.id,
+			title,
+			items,
+		};
+	});
+	//return object with key and collection, eg: [hats]: hats collection
+	return transformedCollection.reduce((accumulator, collection) => {
+		accumulator[collection.title.toLowerCase()] = collection;
+		return accumulator;
+	}, {});
 };
 
 // Initialize Firebase
